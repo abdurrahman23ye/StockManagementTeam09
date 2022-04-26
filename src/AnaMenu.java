@@ -126,7 +126,7 @@ public class AnaMenu extends JFrame {
                 if (Urunler.urunListesiMap.containsKey(urunID)) {
                     System.out.println("lütfen çıkarmak istediğiniz miktarı giriniz");
 
-                    int miktar = TryCatches.tryCatchesInt();
+                    int miktar = TryCatches.tryCatchesMiktar();
                     if (miktar > Urunler.urunListesiMap.get(urunID).getMiktar()) {
                         System.out.println("depoda yeterli miktarda ürün yok");//Burası düzeltilecek buna özel bir
                         //Try catch yapmamız lazım diğer Try catchleri bozmaması için mevcut olana ekleme yapamıyoruz.
