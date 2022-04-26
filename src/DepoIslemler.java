@@ -5,7 +5,9 @@ public class DepoIslemler implements MainInterface {
     static int urunID = 1000; //Map için
     static Scanner scan = new Scanner(System.in);
 
-    public void girisMenusu() {banner(); // Menünun başına banner eklendi.
+
+
+    public void girisMenusu() {//banner(); // Menünun başına banner eklendi.
         girisMenusuSecim();}
 
     private void girisMenusuSecim() {
@@ -37,11 +39,11 @@ public class DepoIslemler implements MainInterface {
         }
     }
 
-    private static void banner() {
+  //  private static void banner() {
 
-        System.out.println("Depo projesi");
-        System.out.println("============================");
-    }
+      //  System.out.println("Depo projesi");
+      //  System.out.println("============================");
+   // }
 
     @Override
     public void urunTanimla() {
