@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
-import java.util.Scanner;
 
 public class AnaMenu extends JFrame {
 
@@ -47,7 +46,7 @@ public class AnaMenu extends JFrame {
                 System.out.println("urunun Birimini giriniz");
                 String urunBirim = obje.scan.nextLine();
 
-                Urunler obje = new Urunler(urunIsmi, urunUretici, urunBirim, 0, "Rafı belli değil");
+                Urunler obje = new Urunler(urunIsmi, urunUretici, 0, urunBirim, "Rafı belli değil",0.0,0.0);
                 Urunler.urunListesiMap.put(DepoIslemler.urunID, obje);
             }
         });
@@ -57,11 +56,11 @@ public class AnaMenu extends JFrame {
 
                 // Urun ID 'e bağlı şekilde printf ile düzenlenerek ürünler listesi oluşturuldu.
 
-                System.out.printf("%-10s %-10s %-10s %-10s %-10s %-10s\n", "Urun ID", "Urun Ismi", "Uretici", "Miktar", "Birim", "Raf");
-                System.out.println("============================================================================");
+                System.out.printf("%-10s %-10s %-10s %-10s %-10s %-10s            %-20s %-10s\n", "Urun ID", "Urun Ismi", "Uretici", "Miktar", "Birim", "Raf","maliyet","fiyat");
+                System.out.println("==========================================================================================================");
 
                 for (Map.Entry<Integer, Urunler> w : Urunler.urunListesiMap.entrySet()) {
-                    System.out.printf("%-10d %-10s %-10s %-10d %-10s %-10s\n", w.getKey(), w.getValue().getIsim(), w.getValue().getUretici(), w.getValue().getMiktar(), w.getValue().getBirim(), w.getValue().getRaf());
+                    System.out.printf("%-10d %-10s %-10s %-10d %-10s %-10s       %-20.1f %-10.1f \n", w.getKey(), w.getValue().getIsim(), w.getValue().getUretici(), w.getValue().getMiktar(), w.getValue().getBirim(), w.getValue().getRaf(),w.getValue().getMaliyet(),w.getValue().getFiyat());
                 }
             }
         });
@@ -80,17 +79,24 @@ public class AnaMenu extends JFrame {
 
 
                 System.out.println("lütfen ürün ID si giriniz");
-                int urunID = TryCatches.tryCatchesInt();
+                int urunID = TryCatches.tryCatchesID();
                 if (Urunler.urunListesiMap.containsKey(urunID)) {
                     System.out.println("lütfen eklemek istediğiniz miktarı giriniz");
                     int miktar = TryCatches.tryCatchesInt();
                     Urunler.urunListesiMap.get(urunID).setMiktar(Urunler.urunListesiMap.get(urunID).getMiktar() + miktar);
+                    System.out.println("lütfen ürünün birim maliyetini giriniz");
+                    double maliyet = TryCatches.tryCatchesDouble();
+                    Urunler.urunListesiMap.get(urunID).setMaliyet(maliyet);
+                    boolean muhasebe=true;
+
+                    muhasebe(muhasebe,maliyet,miktar);
 
 
-                } else {
-                    System.out.println("ID kayıtlı değildir. hatalı işlem yaptınız.");
 
-                    }
+
+
+
+                }
 
                 }
 
@@ -110,7 +116,7 @@ public class AnaMenu extends JFrame {
                     System.out.printf("%-10d %-10s \n", w.getKey(), w.getValue().getIsim());
                 }
                 System.out.println("lütfen ürün ID si giriniz");
-                int urunID = TryCatches.tryCatchesInt();
+                int urunID = TryCatches.tryCatchesID();
                 if (Urunler.urunListesiMap.containsKey(urunID)) {
                     System.out.println("lütfen çıkarmak istediğiniz miktarı giriniz");
 
@@ -118,8 +124,13 @@ public class AnaMenu extends JFrame {
                     if (miktar > Urunler.urunListesiMap.get(urunID).getMiktar()) {
                         System.out.println("depoda yeterli miktarda ürün yok");
                     } else {Urunler.urunListesiMap.get(urunID).setMiktar(Urunler.urunListesiMap.get(urunID).getMiktar() - miktar);}
-                } else {  System.out.println("ID kayıtlı değildir. hatalı işlem yaptınız.");
-                }
+                    System.out.println("lütfen ürünün birim fiyatını giriniz");
+                    double fiyat = TryCatches.tryCatchesDouble();
+                    Urunler.urunListesiMap.get(urunID).setFiyat(fiyat);
+                    boolean muhasebe=false;
+
+                    muhasebe(muhasebe,fiyat,miktar);  }
+
             }
         });
         urunRafaKoymaButton1.addActionListener(new ActionListener() {
@@ -136,7 +147,7 @@ public class AnaMenu extends JFrame {
                     System.out.printf("%-10d %-10s \n", w.getKey(), w.getValue().getIsim());
                 }
                 System.out.println("lütfen ürün ID si giriniz");
-                int urunID = TryCatches.tryCatchesInt();
+                int urunID = TryCatches.tryCatchesID();
                 if (Urunler.urunListesiMap.containsKey(urunID)) {
                     System.out.println("lütfen raf bilgisi giriniz");
                     String urunRaf =DepoIslemler.scan.next();
@@ -144,14 +155,37 @@ public class AnaMenu extends JFrame {
 
 
                 } else {   System.out.println("ID kayıtlı değildir. hatalı işlem yaptınız.");
+
                 }
             }
         });
         cikisButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("İşlemlerinin tamamlandı.Teşekkür ederiz.");
+
+                System.out.println("Kasa Durumu: "+DepoIslemler.kasaDurum);
+                System.out.println("Karlılık: "+DepoIslemler.karlılık);
+
             }
         });
+    }
+
+    private static void muhasebe(boolean muhasebe, double maliyet, int miktar) {
+
+        if(muhasebe){
+
+            DepoIslemler.gider+=miktar*maliyet;
+
+
+        }else {
+            DepoIslemler.gelir+=maliyet*miktar;}//Kod uzamasın diye maliyet parametresini kullanıyorum fakat ürün çıkışı methodundan aldığım aslında fiyat
+
+
+        DepoIslemler.kasaDurum= DepoIslemler.gelir- DepoIslemler.gider;
+        DepoIslemler.karlılık= DepoIslemler.kasaDurum*100/DepoIslemler.gider;
+
+
+
+
     }
 }

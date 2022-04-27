@@ -15,18 +15,39 @@ public class Urunler {
     private int miktar = 0;
     private String birim = "";
     private String raf = "";
+    private double maliyet=0.0;
+    private double fiyat=0.0;
+
+  public void setMaliyet(double maliyet) {
+    this.maliyet = maliyet;
+  }
+
+  public void setFiyat(double fiyat) {
+    this.fiyat = fiyat;
+  }
+
+  public double getMaliyet() {
+    return maliyet;
+  }
+
+  public double getFiyat() {
+    return fiyat;
+  }
 
   public Urunler() {
   }
 
-  public Urunler(String isim, String uretici, String birim, int miktar,  String raf) {
-
+  public Urunler(String isim, String uretici, int miktar, String birim, String raf, double maliyet, double fiyat) {
     this.isim = isim;
     this.uretici = uretici;
     this.miktar = miktar;
     this.birim = birim;
     this.raf = raf;
+    this.maliyet = maliyet;
+    this.fiyat = fiyat;
   }
+
+
 
 
   public String getIsim() {
