@@ -3,10 +3,13 @@ import java.util.Scanner;
 
 public class TryCatches {
 
+    //Ekleme: Ürün çıkışı methodundaki miktarın depoda var olan miktardan fazla olmaması gerekliliği try catch ile sağlandı. Bu sadece spesifik bir
+    // ihtiyaç olması sebebiyle var olan try-catches methoduna ekleme yapılıp yeni bir method oluşturuldu.
+
     /* Karşılaşılabilecek problemler sebebiyle Try-Catches ayrı bir classa alındı.
      * Daha sonra eklenebilecek yeni durumlar için dinamik olmayan sorunları try catch e eklenmedi.
      * Sorunların parent-child ilişkisine dikkat edildi.
-     * Çözümler genel yönlendirmelere değil, spesifik yönlendirmelerebağlandı.
+     * Çözümler genel yönlendirmelere değil, spesifik yönlendirmelere bağlandı.
      * Try-catch ile scannerın birlikte kullanımında sık sık ortaya çıkan dummy problemi için özel çözüm methoda eklendi.(satır 23 ve 24)
      //*** (Ekleme Mehmet Mağden Bey'in katkılarıyla: Scanner kullanırken bir hata durumunda Try bloğundaki alınan değer exeption gerektiriyorsa
      ve bu durum handle edilmişse Java Scan satırından catch satırına atlıyor.( alttaki örnekte 30'dan 38 ve sonrasına geçiş yapması gibi..) Bu durum da
@@ -74,8 +77,11 @@ public class TryCatches {
 
                 if (giris < 0) {
                     throw new IllegalArgumentException();
+                    //Dummy1
 
-                } else if(giris > Urunler.urunListesiMap.get(DepoIslemler.urunID).getMiktar()){ throw  new IllegalAccessException();}
+                }  scan.nextLine();        //Dummy1
+
+                if(giris > Urunler.urunListesiMap.get(DepoIslemler.urunID).getMiktar()){ throw  new IllegalAccessException();}
                 scan.nextLine();        //Dummy1
 
 

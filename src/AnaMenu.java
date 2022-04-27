@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 public class AnaMenu extends JFrame {
 
+    //Ana menudeki bütün işlemler buraya alındı.
+
+
     DepoIslemler obje=new DepoIslemler();
 
 
@@ -67,8 +70,7 @@ public class AnaMenu extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //ID üzerinden urun girişi yapılması için method oluşturuldu. ID'nin hatırlanması sorun olmaması için Methodun başına ürünler ve ID'leri hatırlatma
                 // olarak eklendi. Scannerdan alınan ID ve miktar değişkenleri try-Catch methodu ile kontrol edildi.
-                //* kullanıcının hatırlayamama dışında hatalı girişleri için ana menu, tekrar deneme ve çıkış seçenekleri sunuldu. Tercih'in exception'a yol açmaması
-                // için kontrol yapıldı.
+                //Tercih'in exception'a yol açmamas için kontrol yapıldı.
 
                 System.out.printf("%-10s %-10s\n", "Urun ID", "Urun Ismi");
                 System.out.println("======================");
@@ -86,21 +88,7 @@ public class AnaMenu extends JFrame {
 
 
                 } else {
-                    System.out.println("ID kayıtlı değildir. hatalı işlem yaptınız.");//" Ana menuye donmek için 1'e, ID'i yeniden girmek için 2'e çıkış için 9'a basınız"
-
-                  /*  int tercih=TryCatches.tryCatchesInt();
-
-                    switch (tercih){
-
-                        case 1: girisMenusuSecim();break;
-                        case 2:urunGirisi();break;
-                        case 9:cikis();break;
-
-                        default:
-                            System.out.println("yeniden hatalı giriş yaptınız. Ana menuye yönlendirildiniz.");
-                            girisMenusuSecim();break;
-
-                   */
+                    System.out.println("ID kayıtlı değildir. hatalı işlem yaptınız.");
 
                     }
 
@@ -111,9 +99,9 @@ public class AnaMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 /* ID üzerinden urun çıkışı yapılabilmesi için method oluşturuldu. ID'nin hatırlanması sorun olmaması için Methodun başına ürünler ve ID'leri
-         hatırlatma olarak eklendi. Scannerdan alınan ID ve miktar değişkenleri try-Catch methodu ile kontrol edildi. Kullanıcının hatırlayamama dışında
-          hatalı girişleri için ana menu, tekrar deneme ve çıkış seçenekleri sunuldu. Tercih'in exception'a yol açmaması için kontrol yapıldı.
-           *Depoda olandan fazla ürünün çıkışı istenememesi için kontrol sağlandı.
+         hatırlatma olarak eklendi. Scannerdan alınan ID ve miktar değişkenleri try-Catch methodu ile kontrol edildi.
+          * Tercih'in exception'a yol açmaması için kontrol yapıldı.
+           *Depoda olandan fazla ürünün çıkışı istenememesi ve diğer exeptionlar için miktar değişkenine özel bir method create edildi..
          */
                 System.out.printf("%-10s %-10s\n", "Urun ID", "Urun Ismi");
                 System.out.println("======================");
@@ -128,25 +116,9 @@ public class AnaMenu extends JFrame {
 
                     int miktar = TryCatches.tryCatchesMiktar();
                     if (miktar > Urunler.urunListesiMap.get(urunID).getMiktar()) {
-                        System.out.println("depoda yeterli miktarda ürün yok");//Burası düzeltilecek buna özel bir
-                        //Try catch yapmamız lazım diğer Try catchleri bozmaması için mevcut olana ekleme yapamıyoruz.
-                     //   urunCikisi();
+                        System.out.println("depoda yeterli miktarda ürün yok");
                     } else {Urunler.urunListesiMap.get(urunID).setMiktar(Urunler.urunListesiMap.get(urunID).getMiktar() - miktar);}
-                } else {  System.out.println("ID kayıtlı değildir. hatalı işlem yaptınız.");// Ana menuye donmek için 1'e, ID'i yeniden girmek için 2'e çıkış için 9'a basınız");
-
-                  /*   int tercih2=TryCatches.tryCatchesInt();
-
-                   switch (tercih2){
-
-                        case 1: girisMenusuSecim();break;
-                        case 2:urunGirisi();break;
-                        case 9:cikis();break;
-                        default:
-                            System.out.println("yeniden hatalı giriş yaptınız. Ana menuye yönlendirildiniz.");
-                            girisMenusuSecim();break;
-                    }
-
-                  */
+                } else {  System.out.println("ID kayıtlı değildir. hatalı işlem yaptınız.");
                 }
             }
         });
@@ -171,19 +143,7 @@ public class AnaMenu extends JFrame {
                     Urunler.urunListesiMap.get(urunID).setRaf(urunRaf);
 
 
-                } else {   System.out.println("ID kayıtlı değildir. hatalı işlem yaptınız.");// Ana menuye donmek için 1'e, ID'i yeniden girmek için 2'e çıkış için 9'a basınız");
-
-                /*    int tercih2=TryCatches.tryCatchesInt();
-
-                    switch (tercih2){
-
-                        case 1: girisMenusuSecim();break;
-                        case 2:urunGirisi();break;
-                        case 9:cikis();break;
-                        default:
-                            System.out.println("yeniden hatalı giriş yaptınız. Ana menuye yönlendirildiniz.");
-                            girisMenusuSecim();break;
-                    }*/
+                } else {   System.out.println("ID kayıtlı değildir. hatalı işlem yaptınız.");
                 }
             }
         });

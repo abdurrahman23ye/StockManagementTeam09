@@ -2,7 +2,19 @@ import javax.swing.*;
 
 public class GirisMenusu {
 
+    //Arayüzün create işlemleri yapıldı. Buradaki işlemlerden yararlanmak istiyorsanız: https://www.youtube.com/watch?v=rwksn-BkSpA&t=20s
+    // Arayüz kullanmak başta zahmete yol açsa da birçok gereksiz ayrıntı ile uğraşmamaya yardımcı oluyor.
+    //Bu projede kod arayüz kapatılınca sona eriyor.
+
+
+
     public static void main(String[] args) {
+
+        girisMenusu();
+
+    }
+        static void girisMenusu() {
+
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -29,31 +41,8 @@ public class GirisMenusu {
 
 
 
-   /*     JFrame frame=new JFrame("Ana Menü");
-
-
-        JButton urunTanimlama= new JButton("Urun Tanımlama");
-        urunTanimlama.setBounds(10,10,140,20);
-        frame.add(urunTanimlama);
-        urunTanimlama.setLayout(null);//Bunu da kurcaladım ama sonuç alamadım.
-
-
-
-
-
-
-
-
-
-
-        frame.setSize(300,300);
-        frame.setLayout(null); //Sorun muhtemelen bu ama basit bir çözüm bulmadım.
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-    */
-
-
 
     }
+
+
 }
